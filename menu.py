@@ -1,7 +1,6 @@
 import pygame as pg
 import conf                  
 from utilities import create_player,load_game_saves, save_game
-import time
 import json
 #---------------------------------------------------------------------------------
 #Bildschirm der als erstes beim Starten des Spiels kommt
@@ -39,16 +38,6 @@ class Startbildschirm():
 
     def handling(self):
         #------------------------------------------------------------
-        mouse_pos = pg.mouse.get_pos()
-        if self.neutral:
-            self.hover_color = [conf.button_color] * 7
-
-            if self.rect_ng.collidepoint(mouse_pos):
-                self.hover_color[0] = "Yellow"
-
-            if self.rect_lg.collidepoint(mouse_pos):
-                self.hover_color[1] = "Yellow"
-        #-------------------------------------------------------------
         if self.kb_num > self.button_number: self.kb_num = 0
         elif self.kb_num < 0: self.kb_num = self.button_number
 
@@ -69,7 +58,6 @@ class Startbildschirm():
                 self.hover_color[cursor] = "Yellow"
                 if self.accept:
                     self.accept = False
-                    #load_game_saves()
                     self.running = False
                     return
 
@@ -170,7 +158,6 @@ class Menu():
                     self.running = False
 
             if event.type == pg.KEYDOWN:
-                #if event.key == pg.K_DOWN or event.key == pg.K_UP or pg.K_SPACE and not self.click_active:
                 self.click_active = True
 
             if event.type == pg.KEYUP:
@@ -185,9 +172,6 @@ class Menu():
                 
                     
     def handling(self):
-        #mouse_pos = pg.mouse.get_pos()
-
-        #if self.neutral:
         self.hover_color = [conf.button_color] * 7
 
         if self.kb_num > self.button_number: self.kb_num = 0
@@ -201,7 +185,6 @@ class Menu():
                 self.hover_color[cursor] = "Yellow"
                 self.neutral = False
                 if self.accept:
-                    #print("Save & Exit")
                     save_game(self.player, self.team, self.items,)
                     pg.quit()
                     self.accept = False
@@ -210,7 +193,6 @@ class Menu():
                 self.hover_color[cursor] = "Yellow"
                 self.neutral = False
                 if self.accept:
-                    #print("Wechsel Pokemon")
                     self.accept = False
                     sw_pkmn = Inv(self.team,self.items)
                     sw_pkmn.run()
@@ -257,10 +239,8 @@ class Inv():
         self.item_cnt = items.count("Trank")
 
         self.names = []
-        #print(self.team)
 
         for i in self.team: 
-            #print(i)
             self.names.append(i.name)
 
         while len(self.names)<6: self.names.append("")
@@ -444,9 +424,6 @@ class Inv():
 
 
 if __name__ == "__main__":
-    player, team, items = load_game_saves()  
-    #menu = Menu(player,team,items)
-    #menu.run()
-
+    player, team, items = load_game_saves() 
     start = Startbildschirm()
     start.run()

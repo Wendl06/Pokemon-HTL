@@ -27,9 +27,6 @@ class Player:
 
         self.battle_counter = 0
 
-        pg.mixer.music.set_volume(1)
-        self.sound = pg.mixer.music.load("sound/overworld.ogg")
-
         self.name = self.player[0]
         self.money = self.player[1]
         self.badges = self.player[2]
@@ -66,9 +63,6 @@ class Player:
                 battle_manager.run()
 
                 self.in_battle = False
-                pg.mixer.music.stop()
-                pg.mixer.music.load("sound/overworld.ogg")
-                pg.mixer.music.play(-1)
             
             elif self.rect.colliderect(value) and key == "Heiler" and self.in_battle == False and value.center not in self.collision:
                 self.collision.add(value.center)
@@ -98,10 +92,7 @@ class Player:
                     #print("Hallo")
                     #--------------------------------
                     self.in_battle = False
-                    pg.mixer.music.stop()
-                    pg.mixer.music.load("sound/overworld.ogg")
-                    pg.mixer.music.play(-1)
-
+                    
     def draw(self, screen, camera):
         screen.blit(self.image, (self.rect.x - camera.x, self.rect.y - camera.y))
 

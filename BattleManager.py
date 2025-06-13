@@ -16,8 +16,6 @@ class BattleManager():
 
         self.i = 0 
 
-        pg.mixer.music.set_volume(1)
-
         with open(PKN_BLUEPRINT, "r", encoding="utf-8") as file1:
             self.data = json.load(file1)
 
@@ -73,12 +71,8 @@ class BattleManager():
                 lvl = pokemon[1]
                 gegner_pkmn = load_basic_pkmn(gegner, lvl)
 
-                pg.mixer.music.load("sound/battle.ogg")
-                pg.mixer.music.play(-1)
-
                 if spieler_pkmn.current_hp > 0:
                     Kampf = Battle(spieler_pkmn, gegner_pkmn, self.items, self.team, True, self.npc, self.npc_data)
-                pg.mixer.music.stop()
 
             if Kampf.won == True:
                 PlayerPokemon.check_level_up(spieler_pkmn, self.npc_data[self.npc]["xp"]) #xp
@@ -95,11 +89,7 @@ class BattleManager():
 
             gegner_pkmn = load_basic_pkmn(gegner, lvl)
 
-            pg.mixer.music.load("sound/battle.ogg")
-            pg.mixer.music.play(-1)
-
             Kampf = Battle(spieler_pkmn, gegner_pkmn, self.items, self.team, False, None, None )
-            pg.mixer.music.stop()
             if Kampf.is_caught():
                 caught_pkmn = caught_pkn(gegner_pkmn)
                 caught_pkmn.current_hp = 2*(caught_pkmn.max_hp//3)

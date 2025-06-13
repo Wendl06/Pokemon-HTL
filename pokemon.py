@@ -42,9 +42,6 @@ class PlayerPokemon:
             self.update_base_stats()
         
         self.current_xp += gained_xp
-        
-        if self.level >= 20: pass
-        if self.level >= 40: pass
 
     # Synchronisiert Stats mit momentanen Level
     def update_base_stats(self):
@@ -60,7 +57,7 @@ class PlayerPokemon:
             x = x+i
         self.max_hp = round(self.max_hp + x,0)
         self.current_hp = self.max_hp
-        self.damage = self.damage + 0.25 * x
+        self.damage = self.damage + 0.25 * self.level
         self.xp_cap = BASE_XP_VALUE * floor(self.level ** XP_MULTIPLIER)
         self.speed = self.speed + x
 

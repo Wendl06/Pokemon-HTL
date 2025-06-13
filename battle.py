@@ -41,7 +41,7 @@ class Battle:
         self.start = False
         self.bm_cnt = 1
         self.selection = None
-        self.hover_color = [conf.button_color]*7 #nit hinterfragen
+        self.hover_color = [conf.button_color]*7 
         
         self.font = conf.font_button
         self.status_font = pg.font.Font("font/pixel.ttf", 24)
@@ -51,7 +51,7 @@ class Battle:
         self.hp_liste = []
 
         self.atk_info = None
-        self.catch_chance = 40 #grundwert
+        self.catch_chance = 100 #grundwert
 
         self.npc = npc #name
         self.npc_data = npc_data #json
@@ -62,7 +62,6 @@ class Battle:
         self.enemy_dmg_mult = 1
         self.pkmn_dmg_mult = 1
         #------------------------------------------------
-
         self.draw()
         if self.npc != None:
             self.status(f"{self.npc} fordert dich zu einem Kampf heraus!")
@@ -70,6 +69,7 @@ class Battle:
 
 #--------------------------------------------------------------------------------------
     def draw(self):
+        #Trainer, Hintergrund und NPC
         self.screen.blit(conf.battle, conf.battle_pos)              #Hintergrund
         self.screen.blit(conf.trainer_img, conf.trainer_pos)        #Trainer
         
@@ -77,6 +77,7 @@ class Battle:
             npc = pg.image.load(self.npc_data[self.npc]["battle"])
             self.screen.blit(npc, (1200,200))
         #------------------------------------------------------------------------------
+        #Pokemon werden positioniert
         own_pkmn_img = pg.image.load(self.player_pkmn.graphic_path)
         self.screen.blit(own_pkmn_img,conf.own_pkmn_pos)
 
@@ -89,6 +90,7 @@ class Battle:
         else:
             self.start = True
         #-------------------------------------------------------------------------------
+        #Umrandung des Lebensbalken
         pg.draw.rect(self.screen,"White",conf.atk_window_rect, 0, 10)
         pg.draw.rect(self.screen,"Gray",conf.atk_window_rect, 2, 10)
 
@@ -99,7 +101,8 @@ class Battle:
         pg.draw.rect(self.screen,"Gray",
                      pg.Rect(self.enemy_pkmn_pos_x,conf.hp_bar_y-150,conf.hp_bar_width,conf.hp_bar_height),
                      2, conf.hp_bar_height//2)
-        
+        #-------------------------------------------------------------------------------
+        #Name und Level beider Pokemon
         name = self.font.render(f"{self.player_pkmn.name}", False, "Black")
         Rname = name.get_rect(midleft=(conf.own_hp_bar_x,conf.hp_bar_y-15))
         self.screen.blit(name,Rname)
@@ -117,6 +120,7 @@ class Battle:
         self.screen.blit(e_lvl,e_Rlvl)
         #-------------------------------------------------------------------------------
         #aktuelle leben nie höher als max leben
+        #Prozent ausrechnen und je nach prozent den lebensbalken ausfüllen
         self.player_pkmn.current_hp = min(self.player_pkmn.current_hp, self.player_pkmn.max_hp)
         self.enemy_pkmn.current_hp = min(self.enemy_pkmn.current_hp, self.enemy_pkmn.max_hp)
 
@@ -153,6 +157,8 @@ class Battle:
                      pg.Rect(self.enemy_pkmn_pos_x,conf.hp_bar_y-150,conf.hp_bar_width,conf.hp_bar_height),
                      2, conf.hp_bar_height//2)
         #--------------------------------------------------------------------------------
+        #je nachdem in welchem menü man sich befindet unterschiedliche viele buttons zeichnen
+        #buttons sollen gehighlightet werden
         position = [(conf.button_pos_x, conf.button_pos_y), (conf.button_pos_x, conf.button_pos_y+30),
                     (conf.button_pos_x, conf.button_pos_y+60), (conf.button_pos_x, conf.button_pos_y+90),
                     (conf.button_pos_x, conf.button_pos_y+120)]
@@ -173,7 +179,6 @@ class Battle:
                 while len(text) < 6:
                     text.append("")
                 text.append("Zurück")
-                ##print("text=",text)
 
                 self.wechseln = self.font.render(text[4], False, self.hover_color[4])
                 self.rect_wechseln = self.wechseln.get_rect(midleft =position[4])
@@ -208,7 +213,6 @@ class Battle:
         self.screen.blit(self.item_button, self.rect_item_button)
         self.screen.blit(self.flight_button, self.rect_flight_button)
 
-        #return button
         for i in range(len(self.text)):
             if self.text[i] in ["Zurück",""]:
                 if self.tot: self.text[i] = ""
@@ -223,29 +227,9 @@ class Battle:
         conf.clock.tick(conf.TICK_SPEED)
         #----------------------------------------------------
     def handling(self):
-        mouse_pos = pg.mouse.get_pos()
-
-        if self.neutral:
-            self.hover_color = [conf.button_color] * 7
-
-            if self.rect_atk_button.collidepoint(mouse_pos):
-                self.hover_color[0] = "Yellow"
-
-            elif self.rect_pkmn_button.collidepoint(mouse_pos):
-                self.hover_color[1] = "Yellow"
-
-            elif self.rect_item_button.collidepoint(mouse_pos):
-                self.hover_color[2] = "Yellow"
-
-            elif self.rect_flight_button.collidepoint(mouse_pos):
-                self.hover_color[3] = "Yellow"
-
-            elif self.bm_cnt in [2, 3] and self.rect_back_button.collidepoint(mouse_pos):
-                self.hover_color[4] = "Yellow"
-
-            elif self.bm_cnt == 3 and self.rect_wechseln.collidepoint(mouse_pos):
-                self.hover_color[5] = "Yellow"
-        #-----------------------------------------------------------------------------        
+        #Button Highlighting und aktionen
+        #----------------------------------------------------------------------------- 
+        # In Menü ist das alles eleganter gelöst       
         if self.bm_cnt == 1: button_num = 4
         elif self.bm_cnt == 2 or self.bm_cnt == 4: button_num = 5
         elif self.bm_cnt == 3: button_num = 7
@@ -256,7 +240,10 @@ class Battle:
         if "" in self.text:
             self.merker = self.text.index("")-1
         else: self.merker = None
-
+        #-----------------------------------------------------
+        #unnötig kompliziert aber es funktioniert
+        #ich habe angst, dass wenn ich es richtig mache, dass es dann kaputt wird :(
+        #Wenn In einem Button nichts steht wird der übersprungen 
         if self.bm_cnt == 3 or self.bm_cnt == 4:
             if self.kb_num - self.cursor > 0:
                 if self.kb_num != 0:
@@ -274,7 +261,9 @@ class Battle:
                             self.kb_num = self.merker +1 
 
             else: self.cursor = self.kb_num
-
+        #-----------------------------------------------------
+        #Tatsächlicher Teil für Highlighting 
+        #Ebenfalls zu komplizierte Lösung
         selection = self.selection
         self.neutral = True
         match self.kb_num:
@@ -348,6 +337,7 @@ class Battle:
             return selection
 #--------------------------------------------------------------------------------------------------------------------------------
     def events(self):
+        #Eventhandling
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -370,22 +360,8 @@ class Battle:
                 if event.key == pg.K_SPACE and self.click_active and not self.neutral:
                     self.accept = True
 #------------------------------------------------------------------------------------------------------------------------------
-    def skip_empty_buttons(self, direction, max_index):
-        original = self.kb_num
-        while True:
-            self.kb_num += direction
-            if self.kb_num > max_index:
-                self.kb_num = 1  # Skip index 0 (neutral)
-            elif self.kb_num < 1:
-                self.kb_num = max_index
-
-            if self.text[self.kb_num - 1] != "":
-                break
-            # Verhindere Endlosschleife, falls alles leer ist
-            if self.kb_num == original:
-                break
-#------------------------------------------------------------------------------------------------------------------------------
     def status(self,status):
+        #Anzeige damit der Spieler im Kampf versteht was passiert
         """
         liste machen
         for
@@ -412,7 +388,6 @@ class Battle:
         )
 
         characters = list(status)
-        #print(characters)
         
         for i in range(len(characters)):
             pg.draw.rect(self.screen, "White", rect_background, 0, 5)
@@ -433,9 +408,7 @@ class Battle:
         pg.event.pump()
         self.draw()
         self.events()
-
         answers = self.handling()
-        #self.draw() #mal schaugen ob des schoa geaht
         return answers
 #-----------------------------------------------------------------------------------------------------------------------------
     def check_team_status(self):
@@ -446,6 +419,7 @@ class Battle:
             return True
 #-----------------------------------------------------------------------------------------------------------------------------
     def item_counter(self):
+        #Zeigt die Anzahl der Items an
         if not self.neutral and self.atk_info != "Zurück":         
             if self.atk_info in self.items:
                 text_x = 500
@@ -456,8 +430,9 @@ class Battle:
                 self.screen.blit(cnt, Rcnt)
             
                 pg.display.update()
-
+#-----------------------------------------------------------------------------------------------------------------------------
     def atk_overview(self):
+        #Attacken Informationen (Schaden, Element, Genauigkeit)
         """
         wenn kb_num = ... werd text gehighlighted -> je nach text der im button steht 
         soll aus der attacken übersicht information geladen werden die in einem eigenen fenster (weißes umrandetetes rechteck)
@@ -469,10 +444,6 @@ class Battle:
             if self.atk_info in data.keys():
                 text_x = 530
                 text_y = [conf.button_pos_y,conf.button_pos_y+30,conf.button_pos_y+60]
-
-                #info_rect = pg.Rect(info_x, info_y, 150,200)
-                #pg.draw.rect(self.screen, "White", info_rect, 0, 5)
-                #pg.draw.rect(self.screen, "Gray", info_rect, 2, 5)
 
                 dmg = self.font.render(f"Schaden: {data[self.atk_info]['damage']}", False, "Gray46")
                 type = self.font.render(f"Typ: {data[self.atk_info]['type']}", False, "Gray46")
@@ -489,6 +460,7 @@ class Battle:
                 pg.display.update()
     #----------------------------------------------------------------------------------------------------------------------------
     def check_effect(self, attack, yourturn):
+        #Wenn Attacke einen Spezialeffekt hat, soll dieser ausgeführt werden
         if yourturn:
             if "effect" in attack:
                 match attack["effect"]:
@@ -528,44 +500,76 @@ class Battle:
                         self.enemy_pkmn.current_hp += self.player_pkmn.max_hp//10
                         self.status(f"Der Gegner hat {self.player_pkmn.max_hp//10} HP gestohlen.")
     #----------------------------------------------------------------------------------------------------------------------------
+    def EnemyTurn(self):
+        #Logik für den gegnerischen Angriff
+        random_attack = random.choice(self.enemy_pkmn.moveset)
+        enemy_attack = self.get_attack(random_attack)
+        self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
+        
+        #Schaden
+        type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
+        damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50)*self.enemy_dmg_mult,0)
+
+        if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
+            self.player_pkmn.current_hp -= damage  
+            self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
+                f"{self.player_pkmn.max_hp}")
+            
+            self.check_effect(enemy_attack, yourturn=False)
+        else:
+            self.status(f"{random_attack} verfehlt dein Pokemon...")
+    #----------------------------------------------------------------------------------------------------------------------------
+    def YourTurn(self, chosen_attack):
+        #Logik für den eigenen Angriff
+        if chosen_attack == "Zurück":
+            self.bm_cnt = 1
+        if chosen_attack in self.player_pkmn.moveset:
+            attack_stats = self.get_attack(chosen_attack)
+            self.status(f"{self.player_pkmn.name} greift mit {chosen_attack} an")
+
+            # Schaden
+            type_multiplier = TYPE_CHART[attack_stats["type"]][self.enemy_pkmn.type]
+            damage = round(((attack_stats["damage"] * type_multiplier * self.player_pkmn.damage)//50)*self.pkmn_dmg_mult,0)
+            if attack_stats["accuracy"]*self.pkmn_acc_mult >= random.randint(1,100):
+                self.enemy_pkmn.current_hp -= damage            
+                self.status(f"{self.enemy_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.enemy_pkmn.current_hp}/"
+                    f"{self.enemy_pkmn.max_hp}")
+                
+                self.check_effect(attack_stats, yourturn=True)
+            else:
+                self.status(f"{chosen_attack} verfehlt den Gegner...")
+    #----------------------------------------------------------------------------------------------------------------------------
     def start_battle(self):
-        #print(f"Fight: {self.player_pkmn.name} vs. {self.enemy_pkmn.name}\n---------------------------------------")
+        #Checken ob mindestens ein pokemon lebt
+        #Kampf starten
+        #Weiterleitung ins jeweilige Untermenü
         self.check_team_status()
         while not self.AlleTot and not self.caught:
             while (self.player_pkmn.current_hp > 0) and (self.enemy_pkmn.current_hp > 0):
-                #time.sleep(1)
                 if self.start:
-                    #-----------------
                     answers = self.update()
-                    #----------------
-                    ##print(f"Runde {self.round_counter}:")
-
-                    # KAMPF MENU
-                    #answers = answer_chooser("Was möchtest du tun?", 'Kampf', 'Beutel', 'Pokemon', 'Flucht')
                     if answers == "Kampf" or self.bm_cnt == 2:
-                        ##print("Kampf")
                         if self.bm_cnt != 2:
                             self.bm_cnt = 2
                             self.kb_num = 0
-                        
                         self.fight()
+
                     elif answers == "Pokemon" or self.bm_cnt == 3:
-                        ##print("Pokemon")
                         if self.bm_cnt != 3:
                             self.bm_cnt = 3
                             self.kb_num = 0
                         self.sw_pokemons(tot=False)
+
                     elif answers == "Beutel" or self.bm_cnt == 4:
                         if self.bm_cnt != 4:
                             self.bm_cnt = 4
                             self.kb_num = 0
-                        ##print("Beutel")
                         self.bag()
+
                     elif answers == "Flucht" or self.bm_cnt == 5:
                         self.kb_num = 0
                         if self.flight():
                             return
-                    
                 else: 
                     self.accept = False
                     self.update()
@@ -581,127 +585,45 @@ class Battle:
             self.text.pop(-1)
             self.sw_pokemons(self.tot)
         
-        #print("\n")
         if self.player_pkmn.current_hp <= 0:
             self.player_pkmn.current_hp = 0
-            ##print("Kampf vorbei. Dein Gegner gewinnt. SPIELERNAME wird schwarz vor Augen 🤬")
             self.status("Kampf vorbei. Dein Gegner gewinnt. Dir wird schwarz vor Augen...")
             time.sleep(0.5)
             self.won = False
         elif self.enemy_pkmn.current_hp <= 0:
             self.enemy_pkmn.current_hp = 0
-            ##print("Kampf vorbei. SPIELERNAME gewinnt.")
             self.status("Kampf vorbei. Du gewinnst!")
             time.sleep(0.5)
             self.won = True
 
     def fight(self):
-        chosen_attack = self.update()#answer_chooser("Welche Attacke möchtest du einsetzen?", *(self.player_pkmn.moveset +
-                                                                                  #["Zurück"]))
-        
+        #Attacke Auswähen und je nach pokemon speed angreifen
+        chosen_attack = self.update()
         self.accept = False
         if chosen_attack == "Zurück":
             self.bm_cnt = 1
         if chosen_attack in self.player_pkmn.moveset:
             if self.player_pkmn.speed >= self.enemy_pkmn.speed:
-                # Pokemon 1 hat Erstschlag
-                attack_stats = self.get_attack(chosen_attack)
-                #print(f"{self.player_pkmn.name} greift mit {chosen_attack} an")
-
-                self.status(f"{self.player_pkmn.name} greift mit {chosen_attack} an")
-                # Schaden
-                type_multiplier = TYPE_CHART[attack_stats["type"]][self.enemy_pkmn.type]
-                damage = round(((attack_stats["damage"] * type_multiplier * self.player_pkmn.damage)//50)*self.pkmn_dmg_mult,0)
-                if attack_stats["accuracy"]*self.pkmn_acc_mult >= random.randint(1,100):
-                    self.enemy_pkmn.current_hp -= damage
-                    # Ausgabe
-                    #print(f"{self.enemy_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.enemy_pkmn.current_hp}/"
-                    #    f"{self.enemy_pkmn.max_hp}")
-                
-                    self.status(f"{self.enemy_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.enemy_pkmn.current_hp}/"
-                        f"{self.enemy_pkmn.max_hp}")
-                    
-                    self.check_effect(attack_stats, yourturn=True)
-                else:
-                    self.status(f"{chosen_attack} verfehlt den Gegner...")
-
+                self.YourTurn(chosen_attack)
                 if self.enemy_pkmn.current_hp > 0:
-                    # Logik für Gegner Attacke
-                    random_attack = random.choice(self.enemy_pkmn.moveset)
-                    enemy_attack = self.get_attack(random_attack)
-                    #print(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                    self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                    # Schaden
-                    type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
-                    damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50) *self.enemy_dmg_mult,0)
-                    if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
-                        self.player_pkmn.current_hp -= damage
-                        # Ausgabe
-                        #print(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                        #    f"{self.player_pkmn.max_hp}")
-                        
-                        self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                            f"{self.player_pkmn.max_hp}")
-                        
-                        self.check_effect(enemy_attack, yourturn=False)
-                    else:
-                        self.status(f"{random_attack} verfehlt dein Pokemon...")
-
+                    self.EnemyTurn()
             else:
-                # Pokemon 2 hat Erstschlag
-                # Logik für Gegner Attacke
-                random_attack = random.choice(self.enemy_pkmn.moveset)
-                enemy_attack = self.get_attack(random_attack)
-                #print(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                # Schaden
-                type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
-                damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50)*self.enemy_dmg_mult,0)
-                if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
-                    self.player_pkmn.current_hp -= damage
-                    # Ausgabe
-                    #print(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                    #    f"{self.player_pkmn.max_hp}")
-                    
-                    self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                        f"{self.player_pkmn.max_hp}")
-                    self.check_effect(enemy_attack, yourturn=False)
-                else:
-                    self.status(f"{random_attack} verfehlt dein Pokemon...")
+                self.EnemyTurn()
 
                 if self.player_pkmn.current_hp > 0:
-                    attack_stats = self.get_attack(chosen_attack)
-                    #print(f"{self.player_pkmn.name} greift mit {chosen_attack} an")
-                    self.status(f"{self.player_pkmn.name} greift mit {chosen_attack} an")
-                    # Schaden
-                    type_multiplier = TYPE_CHART[attack_stats["type"]][self.enemy_pkmn.type]
-                    damage = round(((attack_stats["damage"] * type_multiplier * self.player_pkmn.damage)//50)*self.pkmn_dmg_mult)
-                    if attack_stats["accuracy"]*self.pkmn_acc_mult >= random.randint(1,100):
-                        self.enemy_pkmn.current_hp -= damage
-                        # Ausgabe
-                        #print(f"{self.enemy_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.enemy_pkmn.current_hp}/"
-                        #    f"{self.enemy_pkmn.max_hp}")
-                    
-                        self.status(f"{self.enemy_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.enemy_pkmn.current_hp}/"
-                            f"{self.enemy_pkmn.max_hp}")
-                        self.check_effect(attack_stats, yourturn=True)
-                    else:
-                        self.status(f"{chosen_attack} verfehlt den Gegner...")
+                    self.YourTurn(chosen_attack)
             self.bm_cnt = 1
             self.round_counter += 1
             self.kb_num = 0
         self.update()
 
-
     def bag(self):
-        item = self.update()#answer_chooser("Nutze ein Item:", *(self.items + ["Zurück"]))
+        #Item auswählen und Einsetzen
+        item = self.update()
 
         self.accept = False
         if item == "Zurück":
             self.bm_cnt = 1
-
-        """with open(GAME_SAV, "r") as file:
-                data = json.load(file)"""
 
         if item in self.items:
             if item == "Trank":
@@ -714,12 +636,11 @@ class Battle:
                 self.items.remove(item)
             elif item == "Pokeball":
                 if not self.trainer_battle:
-                    self.status(f"SPIELER wirft einen Pokeball.")
+                    self.status(f"Du wirfst einen Pokeball.")
                     self.items.remove(item)
-                    #if chance > ... random int iwas halt
-                    #pokemon fangen
+
                     catch_probability = self.catch_chance * (1 - self.percent_enemy_hp / 100) 
-                    if catch_probability >= random.randint(0,35):
+                    if catch_probability >= random.randint(0,95):
                         self.status(f"{self.enemy_pkmn.name} wurde gefangen")
                         self.enemy_pkmn.current_hp = 0
                         self.caught = True
@@ -729,37 +650,16 @@ class Battle:
                     self.status(f"Sei kein Dieb!")
             #------------------------------------------------------------------------
             if not self.caught:
-                random_attack = random.choice(self.enemy_pkmn.moveset)
-                enemy_attack = self.get_attack(random_attack)
-                ##print(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                # Schaden
-                type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
-                damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50)*self.enemy_dmg_mult,0)
-                if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
-                    self.player_pkmn.current_hp -= damage
-                    # Ausgabe
-                    ##print(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                    #    f"{self.player_pkmn.max_hp}")
-                    
-                    self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                        f"{self.player_pkmn.max_hp}")
-                    self.check_effect(enemy_attack, yourturn=False)
-                else:
-                    self.status(f"{random_attack} verfehlt dein Pokemon...")
+                self.EnemyTurn()
             #-------------------------------------------------------------------------
-            """with open(GAME_SAV, "w") as file:
-                json.dump(data,file, indent=4)"""
-
             self.bm_cnt = 1
             self.kb_num = 0
             self.round_counter += 1
         self.update()
 
     def sw_pokemons(self,tot):
-        #pokemon_names = [pokemon.name for pokemon in self.team] + ["Zurück"]
-        new_pokemon = self.update()#answer_chooser("Wähle ein Pokemon:", *pokemon_names)
-        ##print(new_pokemon)
+        #Pokemon Austauschen
+        new_pokemon = self.update()
         self.accept = False
         if new_pokemon == "Zurück":
             self.bm_cnt = 1
@@ -767,90 +667,44 @@ class Battle:
         else:
             if any(p.name == new_pokemon for p in self.team):
                 for pkmn in self.team:
-                    #-----------------------------------------
-                    """self.hp_liste.append(pkmn.current_hp)
-                    if any(x > 0 for x in self.hp_liste):
-                        self.AlleTot = False
-                    else: self.AlleTot = True"""
-                    #----------------------------------------
                     if pkmn.name == new_pokemon:
                         if pkmn != self.player_pkmn:
-                            #print(pkmn.current_hp)
                             if pkmn.current_hp > 0:
                                 self.player_pkmn = pkmn
-                                #print(f"Neues Pokemon: {self.player_pkmn.name}")
                                 self.status(f"Neues Pokemon: {self.player_pkmn.name}")
                                 self.pkmn_acc_mult = 1
                                 self.pkmn_dmg_mult = 1
                                 #------------------------------------------------------------------
                                 # Logik für Gegner Attacke
                                 if not tot:
-                                    random_attack = random.choice(self.enemy_pkmn.moveset)
-                                    enemy_attack = self.get_attack(random_attack)
-                                    #print(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                                    self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                                    # Schaden
-                                    type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
-                                    damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50)*self.enemy_dmg_mult)
-                                    if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
-                                        self.player_pkmn.current_hp -= damage
-                                        # Ausgabe
-                                        #print(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                                        #    f"{self.player_pkmn.max_hp}")
-                                        
-                                        self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                                            f"{self.player_pkmn.max_hp}")
-                                        self.check_effect(enemy_attack, yourturn=False)
-                                    else:
-                                        self.status(f"{random_attack} verfehlt dein Pokemon...")
+                                    self.EnemyTurn()
                                 else: self.tot = False
                                 #------------------------------------------------------------------
                                 self.bm_cnt = 1
                                 self.kb_num = 0
                                 self.round_counter += 1
                             else: 
-                                #print(f"{pkmn.name} ist K.O.!")
                                 self.status(f"{pkmn.name} ist K.O.!")
 
                         else:
                             if self.player_pkmn.current_hp > 0:
-                                #print(f"{self.player_pkmn.name} kämpft bereits!")
                                 self.status(f"{self.player_pkmn.name} kämpft bereits!")
                             else:
                                 self.status(f"{self.player_pkmn.name} ist K.O.!")
             self.update()
 
     def flight(self):
+        #Flüchten
         if self.trainer_battle:
-            ##print("Du kannst nicht fliehen!")
             self.status("Du kannst nicht fliehen!")
         else:
             if random.randint(0,100)<70:
-                ##print("Du bist geflohen.")
                 self.status("Du bist geflohen")
                 time.sleep(0.5)
                 return True
             else:
                 self.status("Flucht gescheitert")
-                random_attack = random.choice(self.enemy_pkmn.moveset)
-                enemy_attack = self.get_attack(random_attack)
-                #print(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                self.status(f"{self.enemy_pkmn.name} greift mit {random_attack} an")
-                # Schaden
-                type_multiplier = TYPE_CHART[enemy_attack["type"]][self.player_pkmn.type]
-                damage = round(((enemy_attack["damage"] * type_multiplier * self.enemy_pkmn.damage)//50)*self.enemy_dmg_mult)
-                if enemy_attack["accuracy"]*self.enemy_acc_mult >= random.randint(1,100):
-                    self.player_pkmn.current_hp -= damage
-                    # Ausgabe
-                    #print(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                    #    f"{self.player_pkmn.max_hp}")
-                    
-                    self.status(f"{self.player_pkmn.name} erhält {damage} Schadenspunkte. HP: {self.player_pkmn.current_hp}/"
-                        f"{self.player_pkmn.max_hp}")
-                    self.check_effect(enemy_attack, yourturn=False)
-                else:
-                    self.status(f"{random_attack} verfehlt dein Pokemon...")
-                
+                self.EnemyTurn()
                 self.accept = False
                 self.bm_cnt = 1
                 self.kb_num = 0

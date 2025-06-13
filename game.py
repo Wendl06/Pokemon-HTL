@@ -14,9 +14,6 @@ class Game:
         self.clock = pg.time.Clock()
         self.running = True
 
-        pg.mixer.music.set_volume(1)
-        self.sound = pg.mixer.music.load("sound/overworld.ogg")
-
         self.boundaries = map_zammbauer.barrier_rect
         
         #-------------------------
@@ -33,7 +30,7 @@ class Game:
         self.Rtobi = self.tobi.get_rect(center = ((12800/4*3),(9600/4*3)))
 
         self.valle = pg.image.load("graphics/assets/valle.png")
-        self.Rvalle = self.helli.get_rect(center = ((12800/2),(9600/2)))
+        self.Rvalle = self.valle.get_rect(center = ((12800/2),(9600/2)))
         
         self.heiler = pg.image.load("graphics/assets/heiler.png")
         self.Rheiler = self.heiler.get_rect(center = (8800, 5000)) 
@@ -60,7 +57,6 @@ class Game:
         self.i_pressed = False
 
     def run(self):
-        pg.mixer.music.play(-1)
         while self.running:
             self.handle_events()
             self.update()
@@ -103,7 +99,7 @@ class Game:
         self.screen.blit(self.hannah, self.Rhannah.move(-self.camera.x, -self.camera.y))
         self.screen.blit(self.wendl, self.Rwendl.move(-self.camera.x, -self.camera.y))
         self.screen.blit(self.tobi, self.Rtobi.move(-self.camera.x, -self.camera.y))
-        self.screen.blit(self.helli, self.Rhelli.move(-self.camera.x, -self.camera.y))
+        self.screen.blit(self.valle, self.Rvalle.move(-self.camera.x, -self.camera.y))
         self.screen.blit(self.heiler, self.Rheiler.move(-self.camera.x, -self.camera.y))
 
         pg.display.flip()
