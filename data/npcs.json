@@ -1,0 +1,173 @@
+{
+  "NPC":{
+    "xp" : 2500,
+    "money" : 1000
+  },
+  "Baran": {
+    "xp": 5000,
+    "money": 2500,
+    "battle":"graphics/assets/baran2.png",
+    "pokemons": [
+      [
+        "Glumanda",
+        "BARG1",
+        10,
+        0,
+        100
+      ],
+      [
+        "Ponita",
+        "BARG2",
+        11,
+        0,
+        120
+      ],
+      [
+        "Bombardino",
+        "BARG3",
+        12,
+        0,
+        140
+      ]
+    ]
+  },
+  "Hannah": {
+    "xp": 7500,
+    "money": 5000,
+    "battle":"graphics/assets/hannah2.png",
+    "pokemons": [
+      [
+        "Shiggy",
+        "HANS1",
+        20,
+        0,
+        150
+      ],
+      [
+        "Mauzi",
+        "HANS2",
+        21,
+        0,
+        170
+      ],
+      [
+        "Trallalero",
+        "HANS3",
+        22,
+        0,
+        220
+      ]
+    ]
+  },
+  "Wendl": {
+    "xp": 10000,
+    "money": 7500,
+    "battle":"graphics/assets/wendl2.png",
+    "pokemons": [
+      [
+        "Bisasam",
+        "WENB1",
+        30,
+        0,
+        130
+      ],
+      [
+        "Kleinstein",
+        "WENB2",
+        31,
+        0,
+        150
+      ],
+      [
+        "Patapim",
+        "WENB3",
+        32,
+        0,
+        180
+      ]
+    ]
+  },
+  "Tobi": {
+    "xp": 12500,
+    "money": 10000,
+    "battle":"graphics/assets/tobi2.png",
+    "pokemons": [
+      [
+        "Pikachu",
+        "TOBP1",
+        40,
+        0,
+        160
+      ],
+      [
+        "Evoli",
+        "TOBE2",
+        41,
+        0,
+        180
+      ],
+      [
+        "Tung Sahur",
+        "TOBT3",
+        42,
+        0,
+        200
+      ]
+    ]
+  },
+  "Valle": {
+    "xp": 15000,
+    "money": 12500,
+    "battle":"graphics/assets/valle2.png",
+    "pokemons": [
+      [
+        "Ponita",
+        "VALP1",
+        50,
+        0,
+        110
+      ],
+      [
+        "Mauzi",
+        "VALM2",
+        50,
+        0,
+        130
+      ],
+      [
+        "Kleinstein",
+        "VALK3",
+        50,
+        0,
+        160
+      ],
+      [
+        "Evoli",
+        "VALE4",
+        50,
+        0,
+        130
+      ]
+    ]
+  },
+  "Heiler": {
+    "Preis": 2000,
+    "Items": [
+      "Pokeball",
+      "Pokeball",
+      "Pokeball",
+      "Pokeball",
+      "Pokeball",
+      "Trank",
+      "Trank",
+      "Trank",
+      "Trank",
+      "Trank",
+      "Supertrank",
+      "Supertrank",
+      "Supertrank",
+      "Supertrank",
+      "Supertrank"
+    ]
+  }
+}

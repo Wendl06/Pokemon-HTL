@@ -1,0 +1,102 @@
+{
+  "": {"damage": 0, "type": "", "accuracy": 0},
+
+  "Kratzer": {"damage": 40, "type": "Normal", "accuracy": 100},
+  "Ruckzuckhieb": {"damage": 40, "type": "Normal", "accuracy": 100},
+  "Bodycheck": {"damage": 90, "type": "Normal", "accuracy": 85},
+  "Tackle": {"damage": 40, "type": "Normal", "accuracy": 100},
+  "Heuler": {"damage": 0, "type": "Normal", "accuracy": 100, "effect": "attack_reducing"},
+  "Sandwirbel": {"damage": 0, "type": "Normal", "accuracy": 100, "effect": "accuracy_reducing"},
+  "Slam": {"damage": 80, "type": "Normal", "accuracy": 75},
+  "Hyperstrahl": {"damage": 150, "type": "Normal", "accuracy": 90},
+  "Zerschneider": {"damage": 50, "type": "Normal", "accuracy": 95},
+
+  "Glut": {"damage": 40, "type": "Feuer", "accuracy": 100},
+  "Flammenwurf": {"damage": 90, "type": "Feuer", "accuracy": 100},
+  "Feuerzahn": {"damage": 65, "type": "Feuer", "accuracy": 95},
+  "Lohekanonade": {"damage": 150, "type": "Feuer", "accuracy": 90},
+  "Russwolke": {"damage": 0, "type": "Feuer", "accuracy": 100, "effect": "accuracy_reducing"},
+  "Sonnentag": {"damage": 0, "type": "Feuer", "accuracy": 100, "effect": "attack_boost"},
+  "Feuersturm": {"damage": 110, "type": "Feuer", "accuracy": 85},
+  "Nitroladung": {"damage": 50, "type": "Feuer", "accuracy": 100},
+  "Flammenrad": {"damage": 60, "type": "Feuer", "accuracy": 100},
+
+  "Aquaknarre": {"damage": 40, "type": "Wasser", "accuracy": 100},
+  "Surfer": {"damage": 90, "type": "Wasser", "accuracy": 100},
+  "Hydropumpe": {"damage": 110, "type": "Wasser", "accuracy": 80},
+  "Nassschweif": {"damage": 90, "type": "Wasser", "accuracy": 90},
+  "Regentanz": {"damage": 0, "type": "Wasser", "accuracy": 100, "effect": "attack_boost"},
+  "Kaskade": {"damage": 80, "type": "Wasser", "accuracy": 100},
+  "Blubber": {"damage": 40, "type": "Wasser", "accuracy": 100},
+  "Siedewasser": {"damage": 80, "type": "Wasser", "accuracy": 100},
+
+  "Rankenhieb": {"damage": 45, "type": "Pflanze", "accuracy": 100},
+  "Rasierblatt": {"damage": 55, "type": "Pflanze", "accuracy": 95},
+  "Energieball": {"damage": 90, "type": "Pflanze", "accuracy": 100},
+  "Blättertanz": {"damage": 90, "type": "Pflanze", "accuracy": 100},
+  "Synthese": {"damage": 0, "type": "Pflanze", "accuracy": 100, "effect": "healing"},
+  "Wachstum": {"damage": 0, "type": "Pflanze", "accuracy": 100, "effect": "attack_boost"},
+  "Egelsamen": {"damage": 0, "type": "Pflanze", "accuracy": 90, "effect": "steal_hp"},
+  "Laubklinge": {"damage": 90, "type": "Pflanze", "accuracy": 100},
+  "Samenbomben": {"damage": 80, "type": "Pflanze", "accuracy": 100},
+  "Blattgeißel": {"damage": 120, "type": "Pflanze", "accuracy": 85},
+
+  "Donnerblitz": {"damage": 90, "type": "Elektro", "accuracy": 100},
+  "Donnerstoß": {"damage": 80, "type": "Elektro", "accuracy": 100},
+  "Stromstoß": {"damage": 65, "type": "Elektro", "accuracy": 100},
+  "Donner": {"damage": 110, "type": "Elektro", "accuracy": 70},
+
+  "Psychokinese": {"damage": 90, "type": "Psycho", "accuracy": 100},
+  "Spukball": {"damage": 80, "type": "Psycho", "accuracy": 100},
+  "Gedankengut": {"damage": 120, "type": "Psycho", "accuracy": 90},
+
+  "Erdkräfte": {"damage": 90, "type": "Boden", "accuracy": 100},
+  "Lehmbrühe": {"damage": 65, "type": "Boden", "accuracy": 85},
+  "Bunker": {"damage": 60, "type": "Boden", "accuracy": 100},
+
+  "Aero-Ass": {"damage": 60, "type": "Flug", "accuracy": 100},
+  "Fliegen": {"damage": 90, "type": "Flug", "accuracy": 95},
+  "Sturzflug": {"damage": 85, "type": "Flug", "accuracy": 95},
+
+  "Kreuzhieb": {"damage": 80, "type": "Kampf", "accuracy": 100},
+  "Steigerungshieb": {"damage": 120, "type": "Kampf", "accuracy": 90},
+  "Nahkampf": {"damage": 120, "type": "Kampf", "accuracy": 100},
+  "Backflip" : {"damage": 80, "type": "Kampf", "accuracy": 70, "effect":"attack_boost"},
+
+  "Felswurf": {"damage": 50, "type": "Gestein", "accuracy": 90},
+  "Steinkante": {"damage": 80, "type": "Gestein", "accuracy": 100},
+  "Felssturz": {"damage": 150, "type": "Gestein", "accuracy": 90},
+  "Rollen" : {"damage": 75, "type": "Gestein", "accuracy": 90},
+
+  "Käferbiss": {"damage": 60, "type": "Käfer", "accuracy": 100},
+  "Käfergeißel": {"damage": 120, "type": "Käfer", "accuracy": 85},
+  "Facettenaugen": {"damage": 65, "type": "Käfer", "accuracy": 100},
+
+  "Schattenstoß": {"damage": 70, "type": "Geist", "accuracy": 100},
+  "Schattenknochen": {"damage": 85, "type": "Geist", "accuracy": 100},
+
+  "Eisenschweif": {"damage": 100, "type": "Stahl", "accuracy": 75},
+  "Metallklaue": {"damage": 50, "type": "Stahl", "accuracy": 95},
+  "Stahlflügel": {"damage": 70, "type": "Stahl", "accuracy": 90},
+
+  "Eisstrahl": {"damage": 90, "type": "Eis", "accuracy": 100},
+  "Lawine": {"damage": 85, "type": "Eis", "accuracy": 90},
+  "Gefrierbrand": {"damage": 110, "type": "Eis", "accuracy": 90},
+
+  "Drachenklaue": {"damage": 80, "type": "Drache", "accuracy": 100},
+  "Drachenpuls": {"damage": 90, "type": "Drache", "accuracy": 100},
+  "Draco Meteor": {"damage": 140, "type": "Drache", "accuracy": 90},
+
+  "Finsterzahn": {"damage": 65, "type": "Unlicht", "accuracy": 100},
+  "Knirscher": {"damage": 80, "type": "Unlicht", "accuracy": 100},
+  "Fluch": {"damage": 130, "type": "Unlicht", "accuracy": 100},
+
+  "Mondstrahl": {"damage": 95, "type": "Fee", "accuracy": 100},
+  "Feenstoß": {"damage": 90, "type": "Fee", "accuracy": 100},
+  "Feenwind": {"damage": 75, "type": "Fee", "accuracy": 100},
+
+  "Giftschock": {"damage": 80, "type": "Gift", "accuracy": 100},
+  "Matschbombe": {"damage": 90, "type": "Gift", "accuracy": 85},
+  "Gifthieb": {"damage": 70, "type": "Gift", "accuracy": 100}
+}
+

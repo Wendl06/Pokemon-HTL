@@ -1,0 +1,12 @@
+===== Anforderungen =====
+
+Pokemon:
+    NEU:
+    Pkn_id: Eine 5-stellige Hex Nummer mit der eigene Pokemon identifiziert werden können (zwei gleiche Pokemon können
+    ins Team genommen werden)
+
+    NEUES SPEICHERKONZEPT:
+    Basis Stats (name, graphic_path, type, xp_cap, max_hp, damage, speed, moveset) werden in einem allgemeinen
+    File gespeichert (diese werden nach dem Laden geupdatet)
+
+    Redundante Stats (pkn_id, level, current_xp, current_hp) werden unter dem Spielstand gespeichert

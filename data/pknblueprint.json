@@ -1,0 +1,18 @@
+{
+  "Bisasam": ["graphics/assets/bisasam.png", "Pflanze", 100, 30, 20, ["Kratzer", "Heuler", "Rankenhieb", "Synthese"]],
+  "Glumanda": ["graphics/assets/glumanda.png", "Feuer", 90, 35, 25, ["Kratzer", "Heuler", "Glut", "Russwolke"]],
+  "Shiggy": ["graphics/assets/shiggy.png", "Wasser", 110, 28, 22, ["Kratzer", "Regentanz", "Aquaknarre", "Nassschweif"]],
+  "Pikachu": ["graphics/assets/Pikachu.png", "Elektro", 70, 25, 45, ["Ruckzuckhieb", "Donnerblitz", "Donner", "Eisenschweif"]],
+  "Evoli": ["graphics/assets/Evoli.png", "Normal", 85, 30, 30, ["Tackle", "Heuler", "Eisenschweif", "Knirscher"]],
+  "Mauzi": ["graphics/assets/Mauzi.png", "Unlicht", 80, 28, 35, ["Finsterzahn", "Fluch", "Heuler", "Zerschneider"]],
+  "Ponita": ["graphics/assets/Ponita.png", "Feuer", 85, 34, 31, ["Nitroladung", "Glut", "Sonnentag", "Ruckzuckhieb"]],
+  "Onix": ["graphics/assets/Onix.png", "Gestein", 110, 30, 15, ["Felssturz", "Steinkante", "Erdkräfte", "Sandwirbel"]],
+  "Kleinstein": ["graphics/assets/Kleinstein.png", "Boden", 100, 33, 17, ["Bodycheck", "Sandwirbel", "Felswurf", "Bunker"]],
+  "Mew": ["graphics/assets/Mew.png", "Psycho", 100, 33, 32, ["Psychokinese", "Spukball", "Gedankengut", "Feenstoß"]],
+  
+  "Tung Sahur": ["graphics/assets/TTTS.png", "Normal", 100, 30, 20, ["Bodycheck", "Ruckzuckhieb", "Kratzer", "Tackle"]],
+  "Bombardino": ["graphics/assets/Bombardino.png", "Feuer", 90, 35, 25, ["Felssturz", "Nitroladung", "Feuersturm", "Sonnentag"]],
+  "Trallalero": ["graphics/assets/Tralalero.png", "Wasser", 100, 32, 25, ["Siedewasser", "Regentanz", "Kreuzhieb", "Eisenschweif"]],
+  "Patapim": ["graphics/assets/Patapim.png", "Pflanze", 95, 31, 29, ["Energieball", "Rasierblatt", "Felswurf", "Wachstum"]],
+  "Trippi Troppi": ["graphics/assets/Trippi.png", "Drache", 105, 37, 18, ["Drachenklaue", "Drachenpuls", "Sandwirbel", "Hyperstrahl"]]
+}

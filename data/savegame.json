@@ -1,0 +1,60 @@
+{
+    "id-blacklist": [
+        "70F07",
+        "CE8CC",
+        "24C23",
+        "F2C2F",
+        "56F5B",
+        "FCF55",
+        "97099",
+        "B884E",
+        "FE730"
+    ],
+    "player": [
+        "Du",
+        11950,
+        2,
+        8158,
+        4128,
+        [
+            "True",
+            "True",
+            "False",
+            "False",
+            "False"
+        ]
+    ],
+    "pokemons": [
+        [
+            "Shiggy",
+            "CE8CC",
+            22,
+            8350,
+            295.0
+        ],
+        [
+            "Noha",
+            "FCF55",
+            11,
+            0,
+            186
+        ],
+        [],
+        [],
+        [],
+        []
+    ],
+    "items": [
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Trank"
+    ]
+}

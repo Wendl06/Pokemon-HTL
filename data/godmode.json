@@ -1,0 +1,64 @@
+{
+    "id-blacklist": [
+        "F3E11",
+        "D667C",
+        "00716",
+        "698D0",
+        "4392C",
+        "7D8EE",
+        "CBE2F",
+        "42080",
+        "8DFD2",
+        "62F91",
+        "E3770",
+        "DEBD0",
+        "47122",
+        "23482",
+        "4F95C"
+    ],
+    "player": [
+        "Du",
+        100,
+        0,
+        8800,
+        5000,
+        [
+            "False",
+            "False",
+            "False",
+            "False",
+            "False"
+        ]
+    ],
+    "pokemons": [
+        [
+            "Bisasam",
+            "51000",
+            5,
+            0,
+            100
+        ],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "items": [
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Pokeball",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Supertrank",
+        "Trank",
+        "Trank",
+        "Trank",
+        "Trank",
+        "Trank"
+    ]
+}

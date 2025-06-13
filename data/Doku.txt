@@ -1,0 +1,7 @@
+DOKUMENTATION
+===============================================
+
+savegame.json:
+"id-blacklist": Eine Liste mit den bereits vergebenen IDs
+"player": Daten des Players. 0.E.: Name, 1.E.: Geld, 2.E.: # Arena-Orden
+"pokemon1-6": 0.E.: ID, 1.E.: Level, 2.E.: Current XP, 3.E.: Current HP
